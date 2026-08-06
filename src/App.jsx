@@ -191,18 +191,25 @@ function Header({ page, navigate }) {
 
 function Footer({ navigate }) {
   return (
-    <footer className="relative px-6 py-14 flex flex-col items-center justify-center gap-4 overflow-hidden" style={{ background: INK }}>
+    <footer className="relative px-5 py-10 sm:px-8 sm:py-14 overflow-hidden" style={{ background: INK }}>
       <img src={WAVE_NAVY_URI} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-      <img src={DNA_WHITE_NAVY_URI} alt="" className="relative h-9 w-auto opacity-90" />
-      <div className="relative flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px]" style={{ color: "#9AA0A8" }}>
-        {NAV_ITEMS.map((item) => (
-          <button key={item.id} onClick={() => navigate(item.id)} className="hover:text-white transition-colors">
-            {item.label}
-          </button>
-        ))}
-        <button onClick={() => navigate("sitemap")} className="hover:text-white transition-colors">Sitemap</button>
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-6 rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-8 text-center sm:px-10 sm:py-10">
+        <img src={DNA_WHITE_NAVY_URI} alt="" className="h-8 w-auto opacity-90" />
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium" style={{ color: "#9AA0A8" }}>
+          {NAV_ITEMS.map((item) => (
+            <button key={item.id} onClick={() => navigate(item.id)} className="transition-colors hover:text-white">
+              {item.label}
+            </button>
+          ))}
+          <button onClick={() => navigate("sitemap")} className="transition-colors hover:text-white">Sitemap</button>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono uppercase tracking-[0.25em]" style={{ color: "#6B7280" }}>
+          <span>Research use only</span>
+          <span className="h-1 w-1 rounded-full" style={{ background: "#6B7280" }} />
+          <span>Laboratory guidance</span>
+        </div>
+        <span className="text-[11px] font-mono" style={{ color: "#6B7280" }}>&copy; 2026 AERVYN Performance Science</span>
       </div>
-      <span className="relative text-[11px] font-mono" style={{ color: "#6B7280" }}>&copy; 2026 AERVYN Performance Science</span>
     </footer>
   );
 }
@@ -283,7 +290,7 @@ function SitemapPage({ navigate }) {
 
 function ProductSwitcher({ products, selected, navigate }) {
   return (
-    <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+    <div className="flex flex-wrap justify-start gap-2 overflow-x-auto pb-1 sm:justify-center" style={{ scrollbarWidth: "none" }}>
       {products.map((p) => {
         const active = p.id === selected.id;
         return (
@@ -308,16 +315,18 @@ function ProductSwitcher({ products, selected, navigate }) {
 
 function ProductHero({ p, navigate }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl" style={{ background: INK }}>
+    <div className="relative overflow-hidden rounded-[28px] border border-white/10" style={{ background: INK }}>
       <img src={WAVE_NAVY_URI} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
       <img src={DNA_WHITE_URI} alt="" className="absolute -right-6 top-1/2 -translate-y-1/2 w-40 h-[420px] object-contain opacity-[0.07] pointer-events-none" />
       <div className="relative flex flex-col items-center px-6 pt-10 pb-8 sm:px-10 sm:pt-14">
-        <img
-          src={p.image}
-          alt={`${p.name} peptide pen`}
-          className="h-64 sm:h-72 w-auto object-contain"
-          style={{ transform: "rotate(-13deg)", filter: "drop-shadow(0 30px 40px rgba(0,0,0,0.55))" }}
-        />
+        <div className="flex h-[320px] w-full max-w-[320px] items-center justify-center overflow-hidden rounded-[24px] border border-white/10 bg-black/20 p-4 sm:h-[360px] sm:p-6">
+          <img
+            src={p.image}
+            alt={`${p.name} peptide pen`}
+            className="h-full w-full max-h-[280px] object-contain sm:max-h-[320px]"
+            style={{ transform: "rotate(-13deg)", filter: "drop-shadow(0 30px 40px rgba(0,0,0,0.55))" }}
+          />
+        </div>
         <div className="mt-8 text-center">
           <span className="text-[10.5px] tracking-[0.25em] uppercase font-mono px-2.5 py-1 rounded-full" style={{ color: COPPER_LIGHT, background: "rgba(184,115,51,0.15)" }}>
             Research Use Only
@@ -421,7 +430,7 @@ function PenWindow({ pen, clicks }) {
   const next = clicks + 1 <= MAX_CLICKS ? clicks + 1 : null;
 
   return (
-    <div className="relative rounded-2xl p-6 sm:p-8 overflow-hidden" style={{ background: INK, boxShadow: "0 16px 40px rgba(10,12,16,0.35)" }}>
+    <div className="relative overflow-hidden rounded-[28px] border border-white/10 p-6 sm:p-8" style={{ background: INK, boxShadow: "0 16px 40px rgba(10,12,16,0.35)" }}>
       <img src={WAVE_NAVY_URI} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
       <img
         src={pen.image}
@@ -429,9 +438,9 @@ function PenWindow({ pen, clicks }) {
         className="absolute -right-4 -bottom-6 h-[135%] w-auto opacity-20 object-contain pointer-events-none"
         style={{ transform: "rotate(-6deg)" }}
       />
-      <div className="relative mx-auto w-full max-w-[220px] rounded-xl bg-white p-5 flex flex-col items-center" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,0.04)" }}>
+      <div className="relative mx-auto flex w-full max-w-[260px] flex-col items-center rounded-[24px] bg-white p-5 sm:p-6" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,0.04)" }}>
         <div
-          className="relative w-24 h-28 rounded-lg flex flex-col items-center justify-center overflow-hidden border-2"
+          className="relative flex h-32 w-24 flex-col items-center justify-center overflow-hidden rounded-xl border-2 sm:h-36 sm:w-28"
           style={{ background: "#111214", borderColor: pen.color }}
         >
           <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2 h-2 -rotate-45 border-l-2 border-b-2" style={{ borderColor: pen.color }} />
@@ -595,24 +604,29 @@ function HomePage({ navigate }) {
       <div className="relative overflow-hidden" style={{ background: INK }}>
         <img src={WAVE_NAVY_URI} alt="" className="absolute inset-0 w-full h-full object-cover opacity-45" />
         <img src={DNA_WHITE_URI} alt="" className="absolute right-4 top-1/2 -translate-y-1/2 w-44 h-[460px] object-contain opacity-[0.08] pointer-events-none hidden sm:block" />
-        <div className="relative px-6 py-20 sm:py-28 max-w-2xl mx-auto text-center flex flex-col items-center">
-          <img src={LOGO_WHITE_URI} alt="AERVYN Performance Science" className="h-9 sm:h-10 w-auto mb-10" />
-          <div className="text-[11px] tracking-[0.3em] uppercase font-mono mb-5" style={{ color: COPPER_LIGHT }}>Performance Science</div>
-          <h1 className="font-display font-semibold text-4xl sm:text-5xl text-white leading-tight mb-5">
+        <div className="relative mx-auto flex max-w-2xl flex-col items-center px-6 py-20 text-center sm:py-28">
+          <img src={LOGO_WHITE_URI} alt="AERVYN Performance Science" className="mb-10 h-9 w-auto sm:h-10" />
+          <div className="mb-5 text-[11px] font-mono uppercase tracking-[0.3em]" style={{ color: COPPER_LIGHT }}>Performance Science</div>
+          <h1 className="mb-5 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
             Premium peptide solution pens
           </h1>
-          <p className="text-[15px] max-w-md mx-auto mb-9" style={{ color: "#9AA0A8" }}>
+          <p className="mx-auto mb-9 max-w-md text-[15px] leading-relaxed" style={{ color: "#9AA0A8" }}>
             Pre-filled precision pens, independent lab tested & filled.
             <br />
             Explore the range or dial in your dose.
           </p>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <button onClick={() => navigate("products")} className="rounded-full px-5 py-2.5 text-[13px] font-medium" style={{ background: COPPER, color: "white" }}>
               View Products
             </button>
-            <button onClick={() => navigate("calculator")} className="rounded-full px-5 py-2.5 text-[13px] font-medium border" style={{ borderColor: "#3A3F47", color: "white" }}>
+            <button onClick={() => navigate("calculator")} className="rounded-full border px-5 py-2.5 text-[13px] font-medium" style={{ borderColor: "#3A3F47", color: "white" }}>
               Dose Calculator
             </button>
+          </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em]" style={{ color: "#6B7280" }}>
+            <span className="rounded-full border border-white/10 px-3 py-1.5">Independent lab testing</span>
+            <span className="rounded-full border border-white/10 px-3 py-1.5">Precision dosing</span>
+            <span className="rounded-full border border-white/10 px-3 py-1.5">Research-ready pens</span>
           </div>
         </div>
       </div>

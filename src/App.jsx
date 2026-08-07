@@ -262,7 +262,7 @@ function SitemapPage({ navigate }) {
       <div className="text-[11px] tracking-[0.3em] uppercase font-mono mb-3" style={{ color: COPPER }}>Site Map</div>
       <h1 className="font-display font-semibold text-3xl mb-2" style={{ color: NAVY }}>Every page on aervyn.com</h1>
       <p className="text-[14px] mb-10" style={{ color: GREY_500 }}>
-        Direct links for every page — once this is hosted, each URL below can go straight into a QR code.
+        Direct links for every page, once this is hosted, each URL below can go straight into a QR code.
       </p>
       <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10">
         {groups.map((g) => (
@@ -356,7 +356,7 @@ function ProductsPage({ selected, navigate }) {
   const mgPerClick = (p.mg / FILL_ML) * ML_PER_CLICK;
 
   return (
-    <main className="px-6 py-12 sm:px-8 sm:py-16 lg:px-10 max-w-3xl mx-auto">
+    <main className="w-full max-w-3xl mx-auto px-4 py-10 sm:px-8 sm:py-14 lg:px-10">
       <ProductSwitcher products={PRODUCTS} selected={selected} navigate={navigate} />
 
       <div className="mt-6">
@@ -423,7 +423,7 @@ function ProductsPage({ selected, navigate }) {
       </div>
 
       <p className="text-[11px] text-center mt-12 leading-relaxed" style={{ color: GREY_300 }}>
-        For laboratory research use only — not for human consumption, therapeutic use, or diagnosis.
+        For laboratory research use only, not for human consumption, therapeutic use, or diagnosis.
       </p>
     </main>
   );
@@ -517,13 +517,13 @@ function CalculatorPage({ selected, navigate }) {
   const deliveredMg = Number((clicks * mgPerClick).toFixed(3));
 
   return (
-    <main className="px-6 py-12 sm:px-8 sm:py-16 lg:px-10 max-w-3xl mx-auto">
+    <main className="w-full max-w-3xl mx-auto px-4 py-10 sm:px-8 sm:py-14 lg:px-10">
       <div className="relative mb-10 text-center">
-        <img src={WAVE_COPPER_URI} alt="" className="absolute -top-4 left-1/2 -translate-x-1/2 w-[140%] max-w-none opacity-60 pointer-events-none" />
+        <img src={WAVE_COPPER_URI} alt="" className="absolute -top-4 left-1/2 -translate-x-1/2 w-[120%] max-w-none opacity-60 pointer-events-none sm:w-[140%]" />
         <div className="relative text-[11px] tracking-[0.3em] uppercase font-mono mb-3" style={{ color: COPPER }}>Dosing Tool</div>
         <h1 className="relative font-display font-semibold text-[26px] sm:text-[28px] leading-tight mb-3" style={{ color: NAVY }}>Peptide Pen Dose Calculator</h1>
         <p className="relative text-[14px] leading-relaxed max-w-sm mx-auto" style={{ color: GREY_500 }}>
-          Select your AERVYN pen and set a target dose — we'll show you exactly how many clicks to dial in.
+          Select your AERVYN pen and set a target dose, and we'll show you exactly how many clicks to dial in.
         </p>
       </div>
 
@@ -593,7 +593,7 @@ function CalculatorPage({ selected, navigate }) {
           <span>{maxMg.toFixed(1)} mg</span>
         </div>
         <div className="text-[12px] text-center flex items-center justify-center gap-1.5" style={{ color: GREY_300 }}>
-          <span>&#8596;</span> Drag to change your desired dose — or type it above
+          <span>&#8596;</span> Drag to change your desired dose or type it above
         </div>
       </div>
 
@@ -603,7 +603,7 @@ function CalculatorPage({ selected, navigate }) {
       </div>
 
       <p className="text-[11px] text-center mt-10 leading-relaxed" style={{ color: GREY_300 }}>
-        For general guidance only, not medical advice. Research use only — not for human consumption.
+        For general guidance only, not medical advice. Research use only, not for human consumption.
       </p>
     </main>
   );
@@ -682,7 +682,7 @@ export default function AervynSite() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: "white", fontFamily: "Inter, system-ui, sans-serif" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "white", fontFamily: "Inter, system-ui, sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
         .font-display { font-family: 'Space Grotesk', sans-serif; }

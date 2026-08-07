@@ -25,8 +25,8 @@ const COPPER_LIGHT = "#D4A574";
 const GREY_50 = "#F7F6F4";
 const GREY_200 = "#E7E4DE";
 const GREY_300 = "#CBC6BC";
-const GREY_500 = "#8A8479";
-const GREY_800 = "#3A362F";
+const GREY_500 = "#5B6470";
+const GREY_800 = "#243041";
 
 const MAX_CLICKS = 60;
 const FILL_ML = 3;
@@ -258,7 +258,7 @@ function SitemapPage({ navigate }) {
   ];
 
   return (
-    <main className="px-5 sm:px-8 py-12 max-w-3xl mx-auto">
+    <main className="px-6 py-12 sm:px-8 sm:py-16 lg:px-10 max-w-3xl mx-auto">
       <div className="text-[11px] tracking-[0.3em] uppercase font-mono mb-3" style={{ color: COPPER }}>Site Map</div>
       <h1 className="font-display font-semibold text-3xl mb-2" style={{ color: NAVY }}>Every page on aervyn.com</h1>
       <p className="text-[14px] mb-10" style={{ color: GREY_500 }}>
@@ -356,7 +356,7 @@ function ProductsPage({ selected, navigate }) {
   const mgPerClick = (p.mg / FILL_ML) * ML_PER_CLICK;
 
   return (
-    <main className="px-5 sm:px-8 py-10 max-w-2xl mx-auto">
+    <main className="px-6 py-12 sm:px-8 sm:py-16 lg:px-10 max-w-3xl mx-auto">
       <ProductSwitcher products={PRODUCTS} selected={selected} navigate={navigate} />
 
       <div className="mt-6">
@@ -517,7 +517,7 @@ function CalculatorPage({ selected, navigate }) {
   const deliveredMg = Number((clicks * mgPerClick).toFixed(3));
 
   return (
-    <main className="px-5 sm:px-8 py-10 max-w-md mx-auto">
+    <main className="px-6 py-12 sm:px-8 sm:py-16 lg:px-10 max-w-3xl mx-auto">
       <div className="relative mb-10 text-center">
         <img src={WAVE_COPPER_URI} alt="" className="absolute -top-4 left-1/2 -translate-x-1/2 w-[140%] max-w-none opacity-60 pointer-events-none" />
         <div className="relative text-[11px] tracking-[0.3em] uppercase font-mono mb-3" style={{ color: COPPER }}>Dosing Tool</div>
@@ -541,7 +541,7 @@ function CalculatorPage({ selected, navigate }) {
           <h2 className="font-display font-semibold text-[15px]" style={{ color: NAVY }}>Set your target dose</h2>
         </div>
 
-        <div className="text-center mb-1">
+        <div className="mx-auto mb-6 flex max-w-[16rem] items-center justify-center rounded-[24px] border border-[#DAD1C2] bg-[#FCFBF7] px-4 py-4 shadow-[0_12px_30px_rgba(10,12,16,0.05)] sm:px-6">
           <input
             type="number"
             inputMode="decimal"
@@ -549,11 +549,12 @@ function CalculatorPage({ selected, navigate }) {
             min={0}
             max={maxMg}
             value={targetMg}
+            aria-label="Target dose in milligrams"
             onChange={(e) => setTargetMg(roundToStep(Number(e.target.value) || 0))}
-            className="text-center font-display font-semibold text-5xl bg-transparent focus:outline-none w-40"
+            className="w-full border-none bg-transparent text-center font-display font-semibold text-5xl leading-none outline-none sm:text-6xl [appearance:textfield]"
             style={{ color: NAVY }}
           />
-          <span className="font-display font-semibold text-2xl ml-1" style={{ color: GREY_500 }}>mg</span>
+          <span className="ml-2 shrink-0 font-display text-[22px] font-semibold sm:text-[26px]" style={{ color: GREY_500 }}>mg</span>
         </div>
         <div className="text-center text-[13px] mb-6" style={{ color: GREY_500 }}>
           per dose · {mgPerClick.toFixed(2)} mg per click
@@ -614,7 +615,7 @@ function HomePage({ navigate }) {
       <div className="relative overflow-hidden" style={{ background: INK }}>
         <img src={WAVE_NAVY_URI} alt="" className="absolute inset-0 w-full h-full object-cover opacity-45" />
         <img src={DNA_WHITE_URI} alt="" className="absolute right-4 top-1/2 -translate-y-1/2 w-44 h-[460px] object-contain opacity-[0.08] pointer-events-none hidden sm:block" />
-        <div className="relative mx-auto flex max-w-2xl flex-col items-center px-6 py-20 text-center sm:py-28">
+        <div className="relative mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center sm:px-8 sm:py-28 lg:py-32">
           <img src={LOGO_WHITE_URI} alt="AERVYN Performance Science" className="mb-10 h-9 w-auto sm:h-10" />
           <div className="mb-5 text-[11px] font-mono uppercase tracking-[0.3em]" style={{ color: COPPER_LIGHT }}>Performance Science</div>
           <h1 className="mb-5 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">

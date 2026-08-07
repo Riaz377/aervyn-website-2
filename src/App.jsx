@@ -31,6 +31,7 @@ const GREY_800 = "#3A362F";
 const MAX_CLICKS = 60;
 const FILL_ML = 3;
 const ML_PER_CLICK = 0.01;
+const SLIDER_STEP = 0.1;
 
 const PRODUCTS = [
   {
@@ -370,7 +371,10 @@ function ProductsPage({ selected, navigate }) {
         <span>3 mL fill</span>
       </div>
 
-      <p className="text-[15px] leading-relaxed mt-10" style={{ color: GREY_800 }}>{p.description}</p>
+      <div className="mt-10">
+        <h2 className="font-display font-semibold text-[12px] tracking-[0.2em] uppercase mb-3" style={{ color: COPPER }}>Description</h2>
+        <p className="text-[15px] leading-relaxed" style={{ color: GREY_800 }}>{p.description}</p>
+      </div>
 
       <div className="mt-9">
         <h2 className="font-display font-semibold text-[12px] tracking-[0.2em] uppercase mb-3" style={{ color: COPPER }}>Research Focus</h2>
@@ -408,7 +412,7 @@ function ProductsPage({ selected, navigate }) {
         </div>
       </div>
 
-      <div className="mt-9 pt-8" style={{ borderTop: `1px solid ${GREY_200}` }}>
+      <div className="mt-9">
         <h2 className="font-display font-semibold text-[12px] tracking-[0.2em] uppercase mb-3" style={{ color: COPPER }}>Potential Side Effects</h2>
         <div className="flex flex-wrap gap-2 mb-3">
           {p.sideEffects.map((s) => (
@@ -502,12 +506,12 @@ function PenSelect({ pens, selected, navigate }) {
 function CalculatorPage({ selected, navigate }) {
   const mgPerClick = (selected.mg / FILL_ML) * ML_PER_CLICK;
   const maxMg = mgPerClick * MAX_CLICKS;
-  const [targetMg, setTargetMg] = useState(Number((maxMg / 6).toFixed(2)));
+  const roundToStep = (value) => Math.min(maxMg, Math.max(0, Math.round(value * 10) / 10));
+  const [targetMg, setTargetMg] = useState(roundToStep(maxMg / 6));
 
   useEffect(() => {
-    setTargetMg(Number((maxMg / 6).toFixed(2)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected.id]);
+    setTargetMg(roundToStep(maxMg / 6));
+  }, [selected.id, maxMg]);
 
   const clicks = Math.min(MAX_CLICKS, Math.max(0, Math.round(targetMg / mgPerClick)));
   const deliveredMg = Number((clicks * mgPerClick).toFixed(3));
@@ -541,11 +545,11 @@ function CalculatorPage({ selected, navigate }) {
           <input
             type="number"
             inputMode="decimal"
-            step={mgPerClick}
+            step={SLIDER_STEP}
             min={0}
             max={maxMg}
             value={targetMg}
-            onChange={(e) => setTargetMg(Math.min(maxMg, Math.max(0, Number(e.target.value) || 0)))}
+            onChange={(e) => setTargetMg(roundToStep(Number(e.target.value) || 0))}
             className="text-center font-display font-semibold text-5xl bg-transparent focus:outline-none w-40"
             style={{ color: NAVY }}
           />
@@ -572,12 +576,18 @@ function CalculatorPage({ selected, navigate }) {
           type="range"
           min={0}
           max={maxMg}
-          step={mgPerClick}
+          step={SLIDER_STEP}
           value={targetMg}
-          onChange={(e) => setTargetMg(Number(e.target.value))}
+          onChange={(e) => setTargetMg(roundToStep(Number(e.target.value)))}
           style={{ background: `linear-gradient(to right, ${COPPER} 0%, ${COPPER} ${(targetMg / maxMg) * 100}%, ${GREY_200} ${(targetMg / maxMg) * 100}%, ${GREY_200} 100%)`, width: "100%" }}
         />
-        <div className="flex justify-between text-[12px] font-mono mt-2 mb-1" style={{ color: GREY_500 }}>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono" style={{ color: GREY_500 }}>
+          {Array.from({ length: Math.min(11, Math.floor(maxMg / 0.1) + 1) }, (_, index) => {
+            const value = index * 0.1;
+            return <span key={value} className="min-w-[1.6rem] text-center">{value.toFixed(1)}</span>;
+          })}
+        </div>
+        <div className="flex justify-between text-[12px] font-mono mt-1 mb-1" style={{ color: GREY_500 }}>
           <span>0</span>
           <span>{maxMg.toFixed(1)} mg</span>
         </div>
